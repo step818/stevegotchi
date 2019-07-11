@@ -2,19 +2,29 @@ import React from 'react';
 import happy from '../assets/images/happyPika.png';
 import dead from '../assets/images/deadPika.png'
 
+import Buttons from './Buttons';
+
 class MoodControl extends React.Component{
   constructor(props){
     super(props);
     this.count = 1000;
     this.state = {
-      food: 20,
+      food: 10,
       imageVisibleOnPage: happy,
     };
+    this.handleFeedClick = this.handleFeedClick.bind(this);
+    this.currentMood = this.currentMood.bind(this);
   }
 
-  handleFeedClick() {
-    this.setState({imageVisibleOnPage: happy})
-    console.log('Hey you fed me');
+  handleFeedClick(target, amount) {
+    let newFood = this.state[target];
+    newFood += amount;
+    if(newFood > 100){
+      newFood = 100;
+    }
+    this.setState({[target]: newFood},()=> {
+      this.currentMood();
+    });
   }
 
   decreaseHealth(){
@@ -49,8 +59,11 @@ class MoodControl extends React.Component{
     const {food}= this.state
     return(
       <div>
-         <div>Countdown: {food}</div> 
+        <div>Countdown: {food}</div> 
+
         <img src={this.state.imageVisibleOnPage} alt={this.state.imageVisibleOnPage}/>
+
+        <Buttons onFeedClick={this.handleFeedClick} />
       </div>
     );
   }

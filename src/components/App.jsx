@@ -17,10 +17,8 @@ class App extends Component {
     return (
       <div>
 
-
-        <MoodControl startCount='100'/>
+        <MoodControl/>
         
-        <button onClick={this.handleFeedClick}>FEED ME</button>
       </div>
     );
   }
