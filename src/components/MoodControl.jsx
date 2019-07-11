@@ -1,29 +1,56 @@
 import React from 'react';
+import happy from '../assets/images/happyPika.png';
+import dead from '../assets/images/deadPika.png'
 
 class MoodControl extends React.Component{
-
   constructor(props){
     super(props);
+    this.count = 1000;
     this.state = {
-      moodVisibleOnPage: 3
+      food: 20,
+      imageVisibleOnPage: happy,
     };
   }
 
   handleFeedClick() {
-    this.setState({moodVisibleOnPage: 2})
+    this.setState({imageVisibleOnPage: happy})
     console.log('Hey you fed me');
   }
 
-  render(){
-    let currentlyVisiblContent = null;
-    if (this.state.moodVisibleOnPage === 3){
-      currentlyVisiblContent = 'empty';
-    } else if (this.state.moodVisibleOnPage === 2){
-      currentlyVisiblContent = 'full';
+  decreaseHealth(){
+    let newFood = this.state.food;
+    newFood = newFood - 1;
+    if(newFood < 0) {newFood = 0};
+    this.setState({
+      food: newFood
+    });
+  }
+
+  currentMood(){
+    let image = this.state.imageVisibleOnPage;
+    let food = this.state.food;
+    if(food <= 0) {
+      image = dead;
     }
+    else if (food >= 1) {
+      image = happy;
+    }
+    this.setState({imageVisibleOnPage: image});
+  }
+
+  componentDidMount() {
+    this.tickTimer = setInterval(()=> {
+      this.decreaseHealth();
+      this.currentMood();
+    }, this.count);
+  }
+
+  render(){
+    const {food}= this.state
     return(
       <div>
-        {currentlyVisiblContent}
+         <div>Countdown: {food}</div> 
+        <img src={this.state.imageVisibleOnPage} alt={this.state.imageVisibleOnPage}/>
       </div>
     );
   }

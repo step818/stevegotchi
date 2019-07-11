@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import APika from '../assets/images/happyPika.png';
 
-import Timer from './Timer';
 import MoodControl from './MoodControl';
 
 class App extends Component {
@@ -18,13 +16,11 @@ class App extends Component {
   render() { 
     return (
       <div>
-        <Timer startCount='100'/>
 
 
-        <MoodControl />
+        <MoodControl startCount='100'/>
         
         <button onClick={this.handleFeedClick}>FEED ME</button>
-        <img src={ APika } alt="happy pikachu"/>
       </div>
     );
   }

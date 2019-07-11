@@ -21,7 +21,7 @@ class Timer extends React.Component{
     this.setState({
       count: startCount
     })
-    this.doIntervalChange()
+    this.doIntervalChange();
   }
 
   doIntervalChange = () => {
