@@ -5,7 +5,8 @@ class Timer extends React.Component{
     super(props);
     this.state = {
       count: 1
-    }
+    };
+    this.doIntervalChange = this.doIntervalChange.bind(this);
   }
 
   render(){

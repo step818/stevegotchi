@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
 import APika from '../assets/images/happyPika.png';
-import Moment from 'moment';
 
 import Timer from './Timer';
+import MoodControl from './MoodControl';
 
 class App extends Component {
-  constructor(props){
+
+  constructor(props) {
     super(props);
-    this.state = {
-      feed: new Moment()
-    };
-    this.handleFoodClick = this.handleFoodClick.bind(this);
+    this.handleFeedClick = this.handleFeedClick.bind(this);
   }
 
-  handleFoodClick() {
-    this.setState({feed: new Moment()});
-    console.log('Hey you fed me' +  this.state.feed.fromNow());
+  handleFeedClick(){
+    console.log('you fed me');
   }
-
 
   render() { 
     return (
       <div>
         <Timer startCount='100'/>
 
-        <strong onClick={this.handleFoodClick}>Feed Me</strong>
+
+        <MoodControl />
         
-        
+        <button onClick={this.handleFeedClick}>FEED ME</button>
         <img src={ APika } alt="happy pikachu"/>
       </div>
     );
   }
 }
- 
+
 export default App;
